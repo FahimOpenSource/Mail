@@ -40,7 +40,11 @@ function load_mailbox(mailbox) {
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
+  var count = 0;
 
+  function counter() {
+    return count = count + 1;
+  }
 
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
@@ -54,11 +58,22 @@ function load_mailbox(mailbox) {
       for (let i=0; i<emails.length; i++) {
         const div_element = document.createElement('div');
         div_element.innerHTML = emails[i].sender
-        div_element.className = 'email'
+        class_name = `email${counter()}`
+        div_element.className = class_name
         document.querySelector('#emails-view').append(div_element);
-        
-      }
 
+        const span1 = document.createElement('span');
+        const container = document.querySelector(`.${class_name}`)
+        span1.innerHTML = emails[i].subject
+        span1.className = 'subject'
+        container.append(span1);
+        
+        const span2 = document.createElement('span');
+        span2.innerHTML = emails[i].timestamp
+        span2.className = 'date'
+        container.append(span2);
+  
+      }
     }
 
   });
@@ -80,5 +95,15 @@ function submit_email(recipients,subject,body) {
   .then(result => {
       // Print result
       console.log(result);
+      console.log(`these are the results ${result}:${result.message}`);
+
+      if (result.message === 'Email sent successfully.') {
+        console.log('it worked')
+        return load_mailbox('sent')
+
+      }
   });
+  
+  // console.error();
+  // 
 }

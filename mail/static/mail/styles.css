@@ -2,6 +2,34 @@ textarea {
     min-height: 400px;
 }
 
-.email {
-    border: 1px solid #141214;
+#emails-view {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#emails-view > div {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    border: 1px solid black; 
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-weight: bold;
+
+}
+
+
+.subject {
+    font-weight: 600;
+    padding-left: 1rem;
+}
+
+.date {
+    position: absolute;
+    right: 0px;
+    font-weight: 500;
+    /* padding-left: 10rem; */
+    padding-right: 2rem;
+    color: rgb(122, 118, 118);
 }
