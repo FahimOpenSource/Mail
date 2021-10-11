@@ -46,6 +46,7 @@ function load_mailbox(mailbox) {
     return count = count + 1;
   }
 
+  // gets all the emails sent to the signed in email
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
@@ -53,28 +54,40 @@ function load_mailbox(mailbox) {
 
     console.log(emails);
 
+    const element = document.createElement('div');
+    element.className = 'wrapper'
+    document.querySelector('#emails-view').append(element);
 
-    if (mailbox === 'inbox') {
-      for (let i=0; i<emails.length; i++) {
-        const div_element = document.createElement('div');
-        div_element.innerHTML = emails[i].sender
-        class_name = `email${counter()}`
-        div_element.className = class_name
-        document.querySelector('#emails-view').append(div_element);
+    // only displays the emails for the inbox,sent and archived section
+    
+    for (let i=0; i<emails.length; i++) {
 
-        const span1 = document.createElement('span');
-        const container = document.querySelector(`.${class_name}`)
-        span1.innerHTML = emails[i].subject
-        span1.className = 'subject'
-        container.append(span1);
-        
-        const span2 = document.createElement('span');
-        span2.innerHTML = emails[i].timestamp
-        span2.className = 'date'
-        container.append(span2);
-  
-      }
+      // creates a div to contain the sender's email,subject,date and time
+      const div_element = document.createElement('div');
+      // adds an element to the div for the sender's email
+      div_element.innerHTML = emails[i].sender
+      class_name = `email${counter()}`
+      div_element.className = class_name
+      document.querySelector('.wrapper').append(div_element);
+
+      const container = document.querySelector(`.${class_name}`)
+
+      // creates a span element and adds the subject of the email to it
+      const span1 = document.createElement('span');
+      span1.innerHTML = emails[i].subject
+      span1.className = 'subject'
+      container.append(span1);
+
+      // creates another span element and adds the time and date of the email to it
+      const span2 = document.createElement('span');
+      span2.innerHTML = emails[i].timestamp
+      span2.className = 'date'
+      container.append(span2);
+
+      container.addEventListener('click', () => view_email(emails[i]));
+
     }
+  
 
   });
 
@@ -99,11 +112,44 @@ function submit_email(recipients,subject,body) {
 
       if (result.message === 'Email sent successfully.') {
         console.log('it worked')
+        //redirects the user to the sent page after the email is sent
+        alert('Message Has Been Sent')
         return load_mailbox('sent')
 
       }
   });
   
-  // console.error();
-  // 
+}
+
+function view_email(email) {
+
+  document.querySelector('.wrapper').style.display = 'none';
+
+  const sect_divider = document.createElement('hr')
+
+  const container = document.createElement('div')
+  container.className = 'container'
+  // container.innerHTML = sect_divider
+  document.querySelector('#emails-view').append(container);
+
+  const contain = document.querySelector('.container')
+
+  contain.append(sect_divider);
+  const sender = document.createElement('div');
+  sender.innerHTML = email.sender
+  contain.append(sender);
+
+  const reciver = document.createElement('div');
+  reciver.innerHTML = email.recipients
+  contain.append(reciver);
+
+  const subject = document.createElement('div')
+  subject.innerHTML = email.subject
+  contain.append(subject);
+
+  const date = document.createElement('div');
+  date.innerHTML = email.timestamp
+  contain.append(date);
+
+
 }
