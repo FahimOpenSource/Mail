@@ -7,7 +7,29 @@ textarea {
     justify-content: flex-end;
 }
 
-#emails-view div {
-    border: 2px solid black; 
-    padding: 2px 3px 4px 1px;
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+.wrapper > div {
+    border: 1px solid black; 
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.subject {
+    font-weight: 600;
+    padding-left: 1rem;
+}
+
+.date {
+    justify-self: flex-end;
+    font-weight: 500;
+    padding-right: 2rem;
+    color: rgb(122, 118, 118);
 }
