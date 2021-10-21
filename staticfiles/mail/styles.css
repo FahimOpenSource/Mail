@@ -2,20 +2,19 @@ textarea {
     min-height: 400px;
 }
 
-#emails-view {
-    display: flex;
-    justify-content: flex-end;
-}
 
 .wrapper {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
 
 }
 
 .wrapper > div {
-    border: 1px solid black; 
+    display: flex;
+    justify-content:flex-start;
+    border: 1px solid black;
+    position:relative; 
     padding-left: 10px;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -28,8 +27,14 @@ textarea {
 }
 
 .date {
-    justify-self: flex-end;
+    position: absolute;
+    right: 0px;
     font-weight: 500;
     padding-right: 2rem;
     color: rgb(122, 118, 118);
+}
+
+.bold {
+    font-weight: 700;
+
 }

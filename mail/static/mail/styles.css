@@ -33,3 +33,8 @@ textarea {
     padding-right: 2rem;
     color: rgb(122, 118, 118);
 }
+
+.bold {
+    font-weight: 700;
+
+}

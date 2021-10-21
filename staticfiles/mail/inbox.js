@@ -129,26 +129,32 @@ function view_email(email) {
 
   const container = document.createElement('div')
   container.className = 'container'
-  // container.innerHTML = sect_divider
+  // container.innerHTML = `<div><span class="bold">From:</span> ${email.sender}</div>
+  //                        <div><span class="bold">To:</span> ${email.recipients}</div>
+  //                        <div><span class="bold">Subject:</span> ${email.subject}</div>
+  //                        <div><span class="bold">Date:</span> ${email.timestamp}</div>
+  //                        <hr>
+
+  // `
   document.querySelector('#emails-view').append(container);
 
   const contain = document.querySelector('.container')
 
   contain.append(sect_divider);
   const sender = document.createElement('div');
-  sender.innerHTML = email.sender
+  sender.innerHTML = `<span class="bold">From:</span> ${email.sender}`
   contain.append(sender);
 
   const reciver = document.createElement('div');
-  reciver.innerHTML = email.recipients
+  reciver.innerHTML = `<span class="bold">To:</span> ${email.recipients}`
   contain.append(reciver);
 
   const subject = document.createElement('div')
-  subject.innerHTML = email.subject
+  subject.innerHTML = `<span class="bold">Subject:</span> ${email.subject}`
   contain.append(subject);
 
   const date = document.createElement('div');
-  date.innerHTML = email.timestamp
+  date.innerHTML = `<span class="bold">Date:</span> ${email.timestamp}<hr>`
   contain.append(date);
 
 
